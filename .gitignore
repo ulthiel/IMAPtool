@@ -1,0 +1,5 @@
+*.pyc
+Account_local.py
+*.txt
+.DS_Store
+*.mbox
