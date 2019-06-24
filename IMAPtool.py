@@ -1,15 +1,20 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
 
+# Ulrich Thiel, 2019
+
 ################################################################################
 #Imports
 import sys
 reload(sys)
 sys.setdefaultencoding('utf8')
 import getpass, imaplib, hashlib
-from Functions import *
+from lib import Functions
 from Account import *
-from Account_local import *
+try:
+  from Account_local import *
+except:
+  None
 
 ################################################################################
 #Open connection
@@ -22,13 +27,13 @@ M.login(user, password)
 
 ################################################################################
 #Get mailboxes (returned in some weird format)
-mailboxes = GetMailboxes(M)
+mailboxes = Functions.GetMailboxes(M)
 
 ################################################################################
 #Mailbox selection dialog
 print "Mailboxes:"
 for i in range(0, len(mailboxes)):
-  print " (" + str(i+1) + ") " + mailboxes[i] + " (" + str(GetNumberOfMessages(M, mailboxes[i])) + ")"
+  print " (" + str(i+1) + ") " + mailboxes[i] + " (" + str(Functions.GetNumberOfMessages(M, mailboxes[i])) + ")"
 mailbox = int(raw_input("Select mailbox: "))
 mailbox = mailboxes[mailbox-1]
 
@@ -42,7 +47,7 @@ action = int(raw_input("Select action: "))
 ################################################################################
 #Perform action
 if action == 1:
-  BackupMailbox(M, mailbox)
+  Functions.BackupMailbox(M, mailbox)
 
 ################################################################################
 #Logout properly
