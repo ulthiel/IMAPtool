@@ -10,3 +10,5 @@ I noticed some strange issues with Apple Mail when trying to move (thousands of)
 ## Usage
 Edit your account information in Account.py. Set ssl=True if you use an
 SSL connection (this should be standard). Then run ```python IMAPtool.py```. You may need to install the Python module *tqdm* (which is used for displaying progress bars) by running ```pip install tqdm```.
+
+If you need IMAP access to an iCloud account, you first need to set up an *app-specific password* in your [account settings](https://appleid.apple.com/account/manage).
