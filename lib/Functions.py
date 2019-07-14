@@ -33,7 +33,7 @@ def BackupMailbox(M, box):
     start = -1
   mbox = mailbox.mbox(box+"_backup.mbox")
   for i in tqdm(range(0,len(messageIDs))):
-    if i < start:
+    if i <= start:
       continue
     id = messageIDs[i]
     typ, msg = M.fetch(id, '(RFC822)')
