@@ -8,7 +8,7 @@
 import sys
 reload(sys)
 sys.setdefaultencoding('utf8')
-import getpass, imaplib, hashlib
+import getpass, imaplib
 from lib import Functions
 from Account import *
 try:
@@ -49,43 +49,13 @@ action = int(raw_input("Select action: "))
 if action == 1:
   Functions.BackupMailbox(M, mailbox)
 
+elif action == 2:
+  Functions.DeleteDuplicates(M, mailbox)
+
 ################################################################################
 #Logout properly
 M.logout()
 sys.exit(0)
-
-
-
-M.select(mailbox, readonly=True)
-typ, messages = M.search(None, 'ALL')
-messageIDs = str(messages[0]).split(" ")
-numMessages = len(messageIDs)
-hashes = []
-dupes = []
-try:
-  for line in open(mailbox+".txt"):
-    hashes.append(line)
-except:
-  None
-hashFile = open(mailbox+".txt", "a")
-dupeFile = open(mailbox+"_dupes.txt", "a")
-for i in range(len(hashes),len(messageIDs)):
-  id = messageIDs[i]
-  typ, msg = M.fetch(id, '(RFC822)')
-  hash = hashlib.sha512(msg[0][1]).hexdigest()
-  if hash in hashes:
-    dupes.append(id)
-    dupeFile.write(str(id)+"\n")
-  hashes.append(hash)
-  hashFile.write(hash+"\n")
-  sys.stdout.write('\r' + "Searching for duplicates in "+mailbox+": " + str(id) + "/" + str(numMessages) + ", " + str(len(dupes)) + " duplicates found")
-  sys.stdout.flush()
-
-print ""
-
-hashFile.close()
-dupeFile.close()
-M.logout()
 
 
 #Hack to call functions which are defined later in the code
