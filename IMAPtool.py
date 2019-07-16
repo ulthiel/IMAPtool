@@ -54,9 +54,8 @@ elif action == 2:
 
 ################################################################################
 #Logout properly
+M.close()
 M.logout()
-sys.exit(0)
-
 
 #Hack to call functions which are defined later in the code
 #Leave this at the bottom
