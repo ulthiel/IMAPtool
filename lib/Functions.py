@@ -91,7 +91,7 @@ def DeleteDuplicates(M, box):
   print "Deleting "+str(len(dupes))+" duplicates"
 
   #flag dupes as deleted
-  for i in tqdm(range(0,len(dupes)))
+  for i in tqdm(range(0,len(dupes))):
     M.store(int(dupes[i]], "+FLAGS", "\\Deleted")
 
   #expunge
