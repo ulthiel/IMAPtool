@@ -1,6 +1,8 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
-
+#
+# Ulrich Thiel, 2019
+#
 from tqdm import tqdm
 import mailbox
 import hashlib
@@ -58,7 +60,7 @@ def DeleteDuplicates(M, box):
   hashes = []
   try:
     for line in open(box+"_hashes.log"):
-      hashes.append(line)
+      hashes.append(line.rstrip('\n'))
   except:
     None
 
