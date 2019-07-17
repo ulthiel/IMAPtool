@@ -50,7 +50,7 @@ def BackupMailbox(M, box):
 ################################################################################
 #Delete duplicates
 def DeleteDuplicates(M, box):
-  M.select(box, readonly=True)
+  M.select(box, readonly=False)
   typ, messages = M.search(None, 'ALL')
   messageIDs = str(messages[0]).split(" ")
   numMessages = len(messageIDs)
@@ -65,7 +65,7 @@ def DeleteDuplicates(M, box):
   dupes = []
   try:
     for line in open(box+"_dupes.log"):
-      dupes.append(line)
+      dupes.append(int(line))
   except:
     None
 
@@ -92,7 +92,7 @@ def DeleteDuplicates(M, box):
 
   #flag dupes as deleted
   for i in tqdm(range(0,len(dupes))):
-    M.store(int(dupes[i]), "+FLAGS", "\\Deleted")
+    M.store(dupes[i], '+FLAGS', '\\Deleted')
 
   #expunge
   M.expunge()

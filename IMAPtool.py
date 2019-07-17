@@ -42,6 +42,7 @@ mailbox = mailboxes[mailbox-1]
 print "Actions:"
 print "  (1) Backup"
 print "  (2) Delete duplicates"
+print "  (3) Delete test"
 action = int(raw_input("Select action: "))
 
 ################################################################################
@@ -52,13 +53,10 @@ if action == 1:
 elif action == 2:
   Functions.DeleteDuplicates(M, mailbox)
 
+elif action == 3:
+  Functions.DeleteTest(M, mailbox)
+
 ################################################################################
 #Logout properly
 M.close()
 M.logout()
-
-#Hack to call functions which are defined later in the code
-#Leave this at the bottom
-#From https://stackoverflow.com/questions/1590608/is-it-possible-to-forward-declare-a-function-in-python
-if __name__=="__main__":
-   main()
